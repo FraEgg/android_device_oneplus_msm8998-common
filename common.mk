@@ -132,6 +132,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library
+	
+# AndroidBw
+PRODUCT_PACKAGES += \
+	openvpn_client \
+	afreerdp
+#	wireguard_client
 
 # Bluetooth
 PRODUCT_PACKAGES += \
