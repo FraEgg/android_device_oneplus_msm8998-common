@@ -401,6 +401,10 @@
         <transport>hwbinder</transport>
         <version>2.0</version>
         <interface>
+            <name>IAntiFlicker</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
             <name>IDisplayModes</name>
             <instance>default</instance>
         </interface>
@@ -583,15 +587,6 @@
         <version>1.0</version>
         <interface>
             <name>ILinkLatency</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.factory</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IFactory</name>
             <instance>default</instance>
         </interface>
     </hal>
