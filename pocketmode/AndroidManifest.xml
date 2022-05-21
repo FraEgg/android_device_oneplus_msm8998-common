@@ -9,9 +9,11 @@
 
     <application
         android:label="OnePlusPocketMode"
-        android:persistent="true">
+        android:persistent="true"
+        android:defaultToDeviceProtectedStorage="true"
+        android:directBootAware="true">
 
-        <receiver android:name="org.lineageos.pocketmode.BootCompletedReceiver"
+        <receiver android:name=".BootCompletedReceiver"
                   android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -19,8 +21,8 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="org.lineageos.pocketmode.PocketModeService"
-                 android:permission="OnePlusPocketModeService">
+        <service android:name=".PocketModeService"
+                 android:permission="PocketModeService">
         </service>
 
     </application>
