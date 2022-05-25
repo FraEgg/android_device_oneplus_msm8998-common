@@ -184,12 +184,12 @@ on fs
     start vendor.qseecomd
 
 on post-fs
-    # Wait for qseecomd started
-    wait_for_prop vendor.sys.listeners.registered true
-
     chown system system /proc/ship_mode
     chown system system /dev/param
     chown system system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+
+    # Wait for qseecomd started
+    wait_for_prop vendor.sys.listeners.registered true
 
 on late-fs
     # Start devices by sysfs trigger
@@ -262,8 +262,6 @@ on post-fs-data
     # Create /data/vendor/tzstorage directory for SFS listener
     mkdir /data/vendor/tzstorage 0770 system system
 
-    setprop vold.post_fs_data_done 1
-
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0
     chown radio radio /data/vendor/radio/copy_complete
@@ -276,6 +274,10 @@ on post-fs-data
 
     # Trigger WLAN driver load
     write /sys/kernel/boot_wlan/boot_wlan 1
+
+    # keep that at the end of on post-fs-data
+    # Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -423,9 +425,10 @@ service charger /system/bin/charger
     seclabel u:r:charger:s0
 
 service init-devstart-sh /vendor/bin/init.devstart.sh
-    class core
+    class main
     user root
     group root radio
+    disabled
     oneshot
 
 service init-radio-sh /vendor/bin/init.radio.sh
